@@ -5,114 +5,90 @@
  * @format
  */
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+ import React from 'react';
+ import type { PropsWithChildren } from 'react';
+ import {
+ 
+   StatusBar,
+   StyleSheet,
+ 
+   I18nManager,
+   LogBox
+ } from 'react-native';
+ import { QueryClient, QueryClientProvider } from "react-query";
+ import Navigation from "./src/navigation/Navigation";
+ import i18n from "i18next";
+ import { initReactI18next } from "react-i18next";
+ import ar from "./src/localization/ar";
+ import en from "./src/localization/en";
+ import { ThemeProvider } from './src/context/ThemeProvider';
+ import FlashMessage from 'react-native-flash-message';
+ import { Pixel } from './src/constants/styleConstatnts';
+ import HttpApi from 'i18next-http-backend';
+ import Locize from "i18next-locize-backend";
+ const { isRTL } = I18nManager;
+ 
+ LogBox.ignoreAllLogs();
+ 
+ const queryClient = new QueryClient();
+ i18n.use(initReactI18next).use(HttpApi).init({
+  backend: {
+    loadPath: 'https://api.locize.app/711b5a25-d2ed-49a6-9bae-d28787e9bf6f/latest/en/TempalteApp',
+    
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
-
-export default App;
+  
+   resources: {
+    
+    //  ar: {
+    //    translation: ar,
+    //  },
+    //  en: {
+    //    translation: en,
+    //  },
+   },
+   lng: isRTL ? "ar" : "en",
+   debug:true,
+   fallbackLng: isRTL ? "ar" : "en",
+   interpolation: {
+     escapeValue: false,
+   },
+   compatibilityJSON: "v3",
+ });
+ 
+ function App(): React.JSX.Element {
+ 
+ 
+   return (
+     <ThemeProvider>
+       <QueryClientProvider client={queryClient}>
+ 
+         <StatusBar
+           // translucent={true}
+           backgroundColor={"black"}
+         // barStyle="dark-content"
+         />
+         <Navigation />
+         <FlashMessage
+           position="bottom"
+           hideOnPress={true}
+           style={{
+             paddingTop: 5,
+           }}
+           titleStyle={styles.flashMsgTitle}
+ 
+           floating
+         />
+       </QueryClientProvider>
+     </ThemeProvider>
+   );
+ }
+ 
+ const styles = StyleSheet.create({
+   flashMsgTitle: {
+     paddingTop: Pixel(14),
+     alignSelf: "flex-start",
+   },
+ })
+ 
+ export default App;
+ 

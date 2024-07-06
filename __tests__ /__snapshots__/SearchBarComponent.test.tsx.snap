@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchBarComponent Render ComponentCorrect 1`] = `
+<View
+  style={
+    [
+      {
+        "flexDirection": "row",
+        "marginTop": 25,
+        "paddingBottom": 17,
+      },
+    ]
+  }
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "backgroundColor": "#F9F9FF",
+        "borderColor": "#000000",
+        "borderRadius": 94,
+        "borderWidth": 1,
+        "flex": 1,
+        "flexDirection": "row",
+        "fontSize": 23,
+        "height": 82,
+        "marginRight": 12,
+        "paddingLeft": 25,
+        "paddingRight": 17,
+      }
+    }
+  >
+    <TextInput
+      focusable={true}
+      onChangeText={[Function]}
+      placeholderTextColor="#919C9C"
+      returnKeyType="search"
+      style={
+        {
+          "color": "#000000",
+          "flex": 1,
+          "fontSize": 23,
+          "textAlign": "left",
+        }
+      }
+      testID="input"
+      value=""
+    />
+  </View>
+</View>
+`;
