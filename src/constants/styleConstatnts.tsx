@@ -63,21 +63,6 @@ export const Fonts = {
 };
 
 
-export enum Images {
-    invoicesIconActive = require('../assets/images/invoice-icon-fill-3-blue-1.png'),
-    invoicesIconInActive = require('../assets/images/stroke-invoice-blue-1.png'),
-    transactionsIconActive = require('../assets/images/transactions-active.png'),
-    transactionsIconInActive = require('../assets/images/transactions-in-active.png'),
-    notificationsIconActive = require('../assets/images/bell-alert-2.png'),
-    notificationsIconInActive = require('../assets/images/bell-alert.png'),
-    settingsIconActive = require('../assets/images/cog-6-tooth-active.png'),
-    settingsIconInActive = require('../assets/images/cog-6-tooth-in-active.png'),
-    addBtn = require('../assets/images/Group.png'),
-    onBoarding_1 = require('../assets/images/onBoarding_1.png'),
-    onBoarding_2 = require('../assets/images/onBoarding_2.png'),
-    onBoarding_3 = require('../assets/images/onBoarding_3.png'),
-    onBoarding_4 = require('../assets/images/onBoarding_4.png'),
-}
 
 export const NavigationAnimations = {
     fade: "fade",
